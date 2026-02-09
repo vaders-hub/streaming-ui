@@ -1,0 +1,300 @@
+# Oracle schema snapshot
+
+- **DSN**: `localhost:1521/freepdb1`
+
+- **Schema**: `OT`
+
+## Tables (20)
+
+- `BATCH_JOB_EXECUTION`
+- `BATCH_JOB_EXECUTION_CONTEXT`
+- `BATCH_JOB_EXECUTION_PARAMS`
+- `BATCH_JOB_INSTANCE`
+- `BATCH_RESULT`
+- `BATCH_STEP_EXECUTION`
+- `BATCH_STEP_EXECUTION_CONTEXT`
+- `CONTACTS`
+- `CONTRACTS`
+- `COUNTRIES`
+- `CUSTOMERS`
+- `EMPLOYEES`
+- `INVENTORIES`
+- `LOCATIONS`
+- `ORDERS`
+- `ORDER_ITEMS`
+- `PRODUCTS`
+- `PRODUCT_CATEGORIES`
+- `REGIONS`
+- `WAREHOUSES`
+
+## Columns
+
+### `BATCH_JOB_EXECUTION`
+
+| column | type | nullable |
+|---|---|---|
+| `JOB_EXECUTION_ID` | `NUMBER(19,0)` | N |
+| `VERSION` | `NUMBER(19,0)` | Y |
+| `JOB_INSTANCE_ID` | `NUMBER(19,0)` | N |
+| `CREATE_TIME` | `TIMESTAMP(9)` | N |
+| `START_TIME` | `TIMESTAMP(9)` | Y |
+| `END_TIME` | `TIMESTAMP(9)` | Y |
+| `STATUS` | `VARCHAR2(40)` | Y |
+| `EXIT_CODE` | `VARCHAR2(4000)` | Y |
+| `EXIT_MESSAGE` | `VARCHAR2(4000)` | Y |
+| `LAST_UPDATED` | `TIMESTAMP(9)` | Y |
+### `BATCH_JOB_EXECUTION_CONTEXT`
+
+| column | type | nullable |
+|---|---|---|
+| `JOB_EXECUTION_ID` | `NUMBER(19,0)` | N |
+| `SHORT_CONTEXT` | `VARCHAR2(4000)` | N |
+| `SERIALIZED_CONTEXT` | `CLOB` | Y |
+### `BATCH_JOB_EXECUTION_PARAMS`
+
+| column | type | nullable |
+|---|---|---|
+| `JOB_EXECUTION_ID` | `NUMBER(19,0)` | N |
+| `PARAMETER_NAME` | `VARCHAR2(400)` | N |
+| `PARAMETER_TYPE` | `VARCHAR2(400)` | N |
+| `PARAMETER_VALUE` | `VARCHAR2(4000)` | Y |
+| `IDENTIFYING` | `CHAR(1)` | N |
+### `BATCH_JOB_INSTANCE`
+
+| column | type | nullable |
+|---|---|---|
+| `JOB_INSTANCE_ID` | `NUMBER(19,0)` | N |
+| `VERSION` | `NUMBER(19,0)` | Y |
+| `JOB_NAME` | `VARCHAR2(400)` | N |
+| `JOB_KEY` | `VARCHAR2(128)` | N |
+### `BATCH_RESULT`
+
+| column | type | nullable |
+|---|---|---|
+| `RESULT_ID` | `NUMBER` | N |
+| `JOB_NAME` | `VARCHAR2(100)` | N |
+| `START_TIME` | `TIMESTAMP(6)` | N |
+| `END_TIME` | `TIMESTAMP(6)` | Y |
+| `STATUS` | `VARCHAR2(20)` | N |
+| `RECORD_COUNT` | `NUMBER` | Y |
+| `FILE_PATH` | `VARCHAR2(500)` | Y |
+| `ERROR_MESSAGE` | `VARCHAR2(1000)` | Y |
+| `EXECUTION_TIME_SECONDS` | `NUMBER` | Y |
+### `BATCH_STEP_EXECUTION`
+
+| column | type | nullable |
+|---|---|---|
+| `STEP_EXECUTION_ID` | `NUMBER(19,0)` | N |
+| `VERSION` | `NUMBER(19,0)` | N |
+| `STEP_NAME` | `VARCHAR2(400)` | N |
+| `JOB_EXECUTION_ID` | `NUMBER(19,0)` | N |
+| `CREATE_TIME` | `TIMESTAMP(9)` | N |
+| `START_TIME` | `TIMESTAMP(9)` | Y |
+| `END_TIME` | `TIMESTAMP(9)` | Y |
+| `STATUS` | `VARCHAR2(40)` | Y |
+| `COMMIT_COUNT` | `NUMBER(19,0)` | Y |
+| `READ_COUNT` | `NUMBER(19,0)` | Y |
+| `FILTER_COUNT` | `NUMBER(19,0)` | Y |
+| `WRITE_COUNT` | `NUMBER(19,0)` | Y |
+| `READ_SKIP_COUNT` | `NUMBER(19,0)` | Y |
+| `WRITE_SKIP_COUNT` | `NUMBER(19,0)` | Y |
+| `PROCESS_SKIP_COUNT` | `NUMBER(19,0)` | Y |
+| `ROLLBACK_COUNT` | `NUMBER(19,0)` | Y |
+| `EXIT_CODE` | `VARCHAR2(4000)` | Y |
+| `EXIT_MESSAGE` | `VARCHAR2(4000)` | Y |
+| `LAST_UPDATED` | `TIMESTAMP(9)` | Y |
+### `BATCH_STEP_EXECUTION_CONTEXT`
+
+| column | type | nullable |
+|---|---|---|
+| `STEP_EXECUTION_ID` | `NUMBER(19,0)` | N |
+| `SHORT_CONTEXT` | `VARCHAR2(4000)` | N |
+| `SERIALIZED_CONTEXT` | `CLOB` | Y |
+### `CONTACTS`
+
+| column | type | nullable |
+|---|---|---|
+| `CONTACT_ID` | `NUMBER` | N |
+| `FIRST_NAME` | `VARCHAR2(255)` | N |
+| `LAST_NAME` | `VARCHAR2(255)` | N |
+| `EMAIL` | `VARCHAR2(255)` | N |
+| `PHONE` | `VARCHAR2(20)` | Y |
+| `CUSTOMER_ID` | `NUMBER` | Y |
+### `CONTRACTS`
+
+| column | type | nullable |
+|---|---|---|
+| `CONTRACT_ID` | `NUMBER` | N |
+| `CONTRACTOR_NAME` | `NVARCHAR2(400)` | N |
+| `CONTRACT_DATE` | `DATE` | N |
+| `CONTRACT_AMOUNT` | `NUMBER(15,2)` | N |
+| `CONTRACT_AMOUNT_TEXT` | `NVARCHAR2(200)` | Y |
+| `START_DATE` | `DATE` | N |
+| `END_DATE` | `DATE` | N |
+| `DURATION_MONTHS` | `NUMBER` | Y |
+| `CREATED_AT` | `DATE` | N |
+| `UPDATED_AT` | `DATE` | Y |
+### `COUNTRIES`
+
+| column | type | nullable |
+|---|---|---|
+| `COUNTRY_ID` | `CHAR(2)` | N |
+| `COUNTRY_NAME` | `VARCHAR2(40)` | N |
+| `REGION_ID` | `NUMBER` | Y |
+### `CUSTOMERS`
+
+| column | type | nullable |
+|---|---|---|
+| `CUSTOMER_ID` | `NUMBER` | N |
+| `NAME` | `VARCHAR2(255)` | N |
+| `ADDRESS` | `VARCHAR2(255)` | Y |
+| `WEBSITE` | `VARCHAR2(255)` | Y |
+| `CREDIT_LIMIT` | `NUMBER(8,2)` | Y |
+### `EMPLOYEES`
+
+| column | type | nullable |
+|---|---|---|
+| `EMPLOYEE_ID` | `NUMBER` | N |
+| `FIRST_NAME` | `VARCHAR2(255)` | N |
+| `LAST_NAME` | `VARCHAR2(255)` | N |
+| `EMAIL` | `VARCHAR2(255)` | N |
+| `PHONE` | `VARCHAR2(50)` | N |
+| `HIRE_DATE` | `DATE` | N |
+| `MANAGER_ID` | `NUMBER(12,0)` | Y |
+| `JOB_TITLE` | `VARCHAR2(255)` | N |
+### `INVENTORIES`
+
+| column | type | nullable |
+|---|---|---|
+| `PRODUCT_ID` | `NUMBER(12,0)` | N |
+| `WAREHOUSE_ID` | `NUMBER(12,0)` | N |
+| `QUANTITY` | `NUMBER(8,0)` | N |
+### `LOCATIONS`
+
+| column | type | nullable |
+|---|---|---|
+| `LOCATION_ID` | `NUMBER` | N |
+| `ADDRESS` | `VARCHAR2(255)` | N |
+| `POSTAL_CODE` | `VARCHAR2(20)` | Y |
+| `CITY` | `VARCHAR2(50)` | Y |
+| `STATE` | `VARCHAR2(50)` | Y |
+| `COUNTRY_ID` | `CHAR(2)` | Y |
+### `ORDERS`
+
+| column | type | nullable |
+|---|---|---|
+| `ORDER_ID` | `NUMBER` | N |
+| `CUSTOMER_ID` | `NUMBER(6,0)` | N |
+| `STATUS` | `VARCHAR2(20)` | N |
+| `SALESMAN_ID` | `NUMBER(6,0)` | Y |
+| `ORDER_DATE` | `DATE` | N |
+### `ORDER_ITEMS`
+
+| column | type | nullable |
+|---|---|---|
+| `ORDER_ID` | `NUMBER(12,0)` | N |
+| `ITEM_ID` | `NUMBER(12,0)` | N |
+| `PRODUCT_ID` | `NUMBER(12,0)` | N |
+| `QUANTITY` | `NUMBER(8,2)` | N |
+| `UNIT_PRICE` | `NUMBER(8,2)` | N |
+### `PRODUCTS`
+
+| column | type | nullable |
+|---|---|---|
+| `PRODUCT_ID` | `NUMBER` | N |
+| `PRODUCT_NAME` | `VARCHAR2(255)` | N |
+| `DESCRIPTION` | `VARCHAR2(2000)` | Y |
+| `STANDARD_COST` | `NUMBER(9,2)` | Y |
+| `LIST_PRICE` | `NUMBER(9,2)` | Y |
+| `CATEGORY_ID` | `NUMBER` | N |
+### `PRODUCT_CATEGORIES`
+
+| column | type | nullable |
+|---|---|---|
+| `CATEGORY_ID` | `NUMBER` | N |
+| `CATEGORY_NAME` | `VARCHAR2(255)` | N |
+### `REGIONS`
+
+| column | type | nullable |
+|---|---|---|
+| `REGION_ID` | `NUMBER` | N |
+| `REGION_NAME` | `VARCHAR2(50)` | N |
+### `WAREHOUSES`
+
+| column | type | nullable |
+|---|---|---|
+| `WAREHOUSE_ID` | `NUMBER` | N |
+| `WAREHOUSE_NAME` | `VARCHAR2(255)` | Y |
+| `LOCATION_ID` | `NUMBER(12,0)` | Y |
+
+## Constraints (PK/UK/FK)
+
+| table | name | type | columns | ref |
+|---|---|---|---|---|
+| `BATCH_JOB_EXECUTION` | `JOB_INST_EXEC_FK` | `R` | `JOB_INSTANCE_ID` | `SYS_C008756` |
+| `BATCH_JOB_EXECUTION` | `SYS_C008761` | `P` | `JOB_EXECUTION_ID` |  |
+| `BATCH_JOB_EXECUTION_CONTEXT` | `JOB_EXEC_CTX_FK` | `R` | `JOB_EXECUTION_ID` | `SYS_C008761` |
+| `BATCH_JOB_EXECUTION_CONTEXT` | `SYS_C008781` | `P` | `JOB_EXECUTION_ID` |  |
+| `BATCH_JOB_EXECUTION_PARAMS` | `JOB_EXEC_PARAMS_FK` | `R` | `JOB_EXECUTION_ID` | `SYS_C008761` |
+| `BATCH_JOB_INSTANCE` | `JOB_INST_UN` | `U` | `JOB_NAME`, `JOB_KEY` |  |
+| `BATCH_JOB_INSTANCE` | `SYS_C008756` | `P` | `JOB_INSTANCE_ID` |  |
+| `BATCH_RESULT` | `SYS_C008786` | `P` | `RESULT_ID` |  |
+| `BATCH_STEP_EXECUTION` | `JOB_EXEC_STEP_FK` | `R` | `JOB_EXECUTION_ID` | `SYS_C008761` |
+| `BATCH_STEP_EXECUTION` | `SYS_C008773` | `P` | `STEP_EXECUTION_ID` |  |
+| `BATCH_STEP_EXECUTION_CONTEXT` | `STEP_EXEC_CTX_FK` | `R` | `STEP_EXECUTION_ID` | `SYS_C008773` |
+| `BATCH_STEP_EXECUTION_CONTEXT` | `SYS_C008777` | `P` | `STEP_EXECUTION_ID` |  |
+| `CONTACTS` | `FK_CONTACTS_CUSTOMERS` | `R` | `CUSTOMER_ID` | `SYS_C008725` |
+| `CONTACTS` | `SYS_C008730` | `P` | `CONTACT_ID` |  |
+| `CONTRACTS` | `SYS_C008795` | `P` | `CONTRACT_ID` |  |
+| `COUNTRIES` | `FK_COUNTRIES_REGIONS` | `R` | `REGION_ID` | `SYS_C008695` |
+| `COUNTRIES` | `SYS_C008697` | `P` | `COUNTRY_ID` |  |
+| `CUSTOMERS` | `SYS_C008725` | `P` | `CUSTOMER_ID` |  |
+| `EMPLOYEES` | `FK_EMPLOYEES_MANAGER` | `R` | `MANAGER_ID` | `SYS_C008713` |
+| `EMPLOYEES` | `SYS_C008713` | `P` | `EMPLOYEE_ID` |  |
+| `INVENTORIES` | `FK_INVENTORIES_PRODUCTS` | `R` | `PRODUCT_ID` | `SYS_C008721` |
+| `INVENTORIES` | `FK_INVENTORIES_WAREHOUSES` | `R` | `WAREHOUSE_ID` | `SYS_C008704` |
+| `INVENTORIES` | `PK_INVENTORIES` | `P` | `PRODUCT_ID`, `WAREHOUSE_ID` |  |
+| `LOCATIONS` | `FK_LOCATIONS_COUNTRIES` | `R` | `COUNTRY_ID` | `SYS_C008697` |
+| `LOCATIONS` | `SYS_C008701` | `P` | `LOCATION_ID` |  |
+| `ORDERS` | `FK_ORDERS_CUSTOMERS` | `R` | `CUSTOMER_ID` | `SYS_C008725` |
+| `ORDERS` | `FK_ORDERS_EMPLOYEES` | `R` | `SALESMAN_ID` | `SYS_C008713` |
+| `ORDERS` | `SYS_C008736` | `P` | `ORDER_ID` |  |
+| `ORDER_ITEMS` | `FK_ORDER_ITEMS_ORDERS` | `R` | `ORDER_ID` | `SYS_C008736` |
+| `ORDER_ITEMS` | `FK_ORDER_ITEMS_PRODUCTS` | `R` | `PRODUCT_ID` | `SYS_C008721` |
+| `ORDER_ITEMS` | `PK_ORDER_ITEMS` | `P` | `ORDER_ID`, `ITEM_ID` |  |
+| `PRODUCTS` | `FK_PRODUCTS_CATEGORIES` | `R` | `CATEGORY_ID` | `SYS_C008717` |
+| `PRODUCTS` | `SYS_C008721` | `P` | `PRODUCT_ID` |  |
+| `PRODUCT_CATEGORIES` | `SYS_C008717` | `P` | `CATEGORY_ID` |  |
+| `REGIONS` | `SYS_C008695` | `P` | `REGION_ID` |  |
+| `WAREHOUSES` | `FK_WAREHOUSES_LOCATIONS` | `R` | `LOCATION_ID` | `SYS_C008701` |
+| `WAREHOUSES` | `SYS_C008704` | `P` | `WAREHOUSE_ID` |  |
+
+## Indexes
+
+| table | index | columns |
+|---|---|---|
+| `BATCH_JOB_EXECUTION` | `SYS_C008761` | `JOB_EXECUTION_ID` |
+| `BATCH_JOB_EXECUTION_CONTEXT` | `SYS_C008781` | `JOB_EXECUTION_ID` |
+| `BATCH_JOB_INSTANCE` | `JOB_INST_UN` | `JOB_NAME`, `JOB_KEY` |
+| `BATCH_JOB_INSTANCE` | `SYS_C008756` | `JOB_INSTANCE_ID` |
+| `BATCH_RESULT` | `SYS_C008786` | `RESULT_ID` |
+| `BATCH_STEP_EXECUTION` | `SYS_C008773` | `STEP_EXECUTION_ID` |
+| `BATCH_STEP_EXECUTION_CONTEXT` | `SYS_C008777` | `STEP_EXECUTION_ID` |
+| `CONTACTS` | `SYS_C008730` | `CONTACT_ID` |
+| `CONTRACTS` | `IDX_CONTRACTOR_NAME` | `CONTRACTOR_NAME` |
+| `CONTRACTS` | `IDX_CONTRACT_DATE` | `CONTRACT_DATE` |
+| `CONTRACTS` | `IDX_END_DATE` | `END_DATE` |
+| `CONTRACTS` | `IDX_START_DATE` | `START_DATE` |
+| `CONTRACTS` | `SYS_C008795` | `CONTRACT_ID` |
+| `COUNTRIES` | `SYS_C008697` | `COUNTRY_ID` |
+| `CUSTOMERS` | `SYS_C008725` | `CUSTOMER_ID` |
+| `EMPLOYEES` | `SYS_C008713` | `EMPLOYEE_ID` |
+| `INVENTORIES` | `PK_INVENTORIES` | `PRODUCT_ID`, `WAREHOUSE_ID` |
+| `LOCATIONS` | `SYS_C008701` | `LOCATION_ID` |
+| `ORDERS` | `SYS_C008736` | `ORDER_ID` |
+| `ORDER_ITEMS` | `PK_ORDER_ITEMS` | `ORDER_ID`, `ITEM_ID` |
+| `PRODUCTS` | `SYS_C008721` | `PRODUCT_ID` |
+| `PRODUCT_CATEGORIES` | `SYS_C008717` | `CATEGORY_ID` |
+| `REGIONS` | `SYS_C008695` | `REGION_ID` |
+| `WAREHOUSES` | `SYS_C008704` | `WAREHOUSE_ID` |
+

@@ -1,0 +1,11 @@
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+.env
+.poetry-cache/
+.ruff_cache/
+.pytest_cache/
+*.log
+dist/
+build/

@@ -1,0 +1,28 @@
+{
+  "include": ["server/app"],
+  "exclude": [
+    "**/__pycache__",
+    "**/node_modules",
+    "**/.venv",
+    "**/.*",
+    "front/**"
+  ],
+  "venvPath": "server",
+  "venv": ".venv",
+  "typeCheckingMode": "basic",
+  "reportMissingImports": true,
+  "reportMissingTypeStubs": false,
+  "reportUnusedImport": "warning",
+  "reportUnusedVariable": "warning",
+  "reportDuplicateImport": "warning",
+  "pythonPlatform": "Windows",
+  "pythonVersion": "3.13",
+  "executionEnvironments": [
+    {
+      "root": "server",
+      "pythonVersion": "3.13",
+      "pythonPlatform": "Windows",
+      "extraPaths": ["server"]
+    }
+  ]
+}
