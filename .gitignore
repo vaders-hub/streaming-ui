@@ -66,3 +66,6 @@ htmlcov/
 Thumbs.db
 
 .claude/
+
+# Poetry
+server/.poetry-cache/
