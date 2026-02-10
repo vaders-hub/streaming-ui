@@ -2,7 +2,6 @@
 Pydantic models for API request/response schemas.
 """
 
-from datetime import datetime
 from typing import Literal
 
 from pydantic import BaseModel, Field
@@ -17,28 +16,26 @@ class CreateOrderRequest(BaseModel):
     """Request model for creating a new order."""
 
     customer_id: int = Field(..., ge=1, description="Customer ID (must be >= 1)")
-    status: str = Field(
-        "PENDING", min_length=1, max_length=20, description="Order status"
-    )
-    salesman_id: int | None = Field(
-        default=None, ge=1, description="Salesman ID (optional)"
-    )
+    status: str = Field("PENDING", min_length=1, max_length=20, description="Order status")
+    salesman_id: int | None = Field(default=None, ge=1, description="Salesman ID (optional)")
 
 
 class OracleOrdersStreamRequest(BaseModel):
     """Request body for POST /stream/oracle/orders/changes."""
-    
+
     limit: int = Field(50, ge=1, le=500, description="Max orders to track")
     poll_interval: float = Field(2.0, ge=0.2, le=30.0, description="Poll interval in seconds")
 
 
 class OracleTelemetryStreamRequest(BaseModel):
     """Request body for POST /stream/oracle/telemetry."""
+
     pass
 
 
 class DatabaseStreamRequest(BaseModel):
     """Request body for POST /stream/database."""
+
     pass
 
 
@@ -95,12 +92,8 @@ class ChatRequest(BaseModel):
     """Request body for POST /chat/stream."""
 
     prompt: str = Field(..., min_length=1, description="User prompt")
-    mode: ChunkMode = Field(
-        "token", description="Chunking mode: token, chars, or paragraph"
-    )
-    chunk_size: int = Field(
-        80, ge=1, le=2000, description="Chunk size for chars/paragraph mode"
-    )
+    mode: ChunkMode = Field("token", description="Chunking mode: token, chars, or paragraph")
+    chunk_size: int = Field(80, ge=1, le=2000, description="Chunk size for chars/paragraph mode")
 
 
 # Health API Models

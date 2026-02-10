@@ -54,9 +54,7 @@ async def chat_stream_get(
 
 
 @router.post("/stream")
-async def chat_stream_post(
-    request: ChatRequest, http_request: Request
-) -> EventSourceResponse:
+async def chat_stream_post(request: ChatRequest, http_request: Request) -> EventSourceResponse:
     """
     Stream chat completion tokens via SSE (POST).
 

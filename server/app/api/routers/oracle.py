@@ -117,9 +117,7 @@ def update_order_status(
         order.status = req.status
         db.flush()
 
-        logger.info(
-            f"Updated order {order_id} status: {old_status} -> {req.status}"
-        )
+        logger.info(f"Updated order {order_id} status: {old_status} -> {req.status}")
 
         return UpdateOrderStatusResponse(
             ok=True,

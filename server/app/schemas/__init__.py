@@ -21,9 +21,9 @@ from app.schemas.streaming import (
     CustomData,
     DatabaseData,
     ErrorData,
+    OracleTelemetryData,
     OrderChangeData,
     OrderData,
-    OracleTelemetryData,
     RedisData,
     TimestampData,
 )

@@ -62,9 +62,7 @@ def _fetch_oracle_telemetry(
     """Fetch Oracle telemetry."""
     with session_factory() as session:
         start = time.perf_counter()
-        result = session.execute(
-            text(
-                """
+        result = session.execute(text("""
                 SELECT
                     TO_CHAR(
                         SYSTIMESTAMP,
@@ -72,9 +70,7 @@ def _fetch_oracle_telemetry(
                     ) AS db_time,
                     (SELECT COUNT(*) FROM USER_OBJECTS) AS object_count
                 FROM dual
-                """
-            )
-        )
+                """))
         row = result.fetchone()
         elapsed_ms = (time.perf_counter() - start) * 1000
 
@@ -84,9 +80,7 @@ def _fetch_oracle_telemetry(
         return db_time, object_count, elapsed_ms
 
 
-def _fetch_latest_orders(
-    session_factory: Callable[[], AbstractContextManager[Session]], limit: int
-) -> list[dict]:
+def _fetch_latest_orders(session_factory: Callable[[], AbstractContextManager[Session]], limit: int) -> list[dict]:
     """Fetch latest orders."""
     with session_factory() as session:
         stmt = select(Order).order_by(Order.order_id.desc()).limit(limit)
@@ -147,9 +141,7 @@ async def stream_database_data(
             try:
                 db_time = await asyncio.to_thread(_fetch_db_time, session_factory)
 
-                yield _create_event_data(
-                    "database", {"count": count, "db_time": str(db_time) if db_time else None}
-                )
+                yield _create_event_data("database", {"count": count, "db_time": str(db_time) if db_time else None})
 
                 count += 1
                 retry_count = 0
@@ -186,9 +178,7 @@ async def stream_oracle_telemetry_data(
     try:
         while True:
             try:
-                db_time, object_count, elapsed_ms = await asyncio.to_thread(
-                    _fetch_oracle_telemetry, session_factory
-                )
+                db_time, object_count, elapsed_ms = await asyncio.to_thread(_fetch_oracle_telemetry, session_factory)
 
                 yield _create_event_data(
                     "oracle_telemetry",
@@ -240,9 +230,7 @@ async def stream_oracle_orders_changes_data(
 
     try:
         # 초기 스냅샷
-        prev_status, last_max_id = await asyncio.to_thread(
-            _fetch_initial_order_status, session_factory, limit
-        )
+        prev_status, last_max_id = await asyncio.to_thread(_fetch_initial_order_status, session_factory, limit)
 
         yield _create_event_data(
             "oracle_orders_ready",
@@ -252,9 +240,7 @@ async def stream_oracle_orders_changes_data(
         while True:
             try:
                 # 1) 신규 주문 조회 및 처리
-                new_orders = await asyncio.to_thread(
-                    _fetch_new_orders_since, session_factory, last_max_id
-                )
+                new_orders = await asyncio.to_thread(_fetch_new_orders_since, session_factory, last_max_id)
 
                 for order in new_orders:
                     oid = order["order_id"]
@@ -267,10 +253,8 @@ async def stream_oracle_orders_changes_data(
                     count += 1
 
                 # 2) 상태 변경 확인
-                latest_orders = await asyncio.to_thread(
-                    _fetch_latest_orders, session_factory, limit
-                )
-                
+                latest_orders = await asyncio.to_thread(_fetch_latest_orders, session_factory, limit)
+
                 latest_ids = []
                 for order in latest_orders:
                     oid = order["order_id"]

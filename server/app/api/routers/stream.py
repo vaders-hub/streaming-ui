@@ -1,6 +1,6 @@
 import logging
 
-from fastapi import APIRouter, Depends, Query
+from fastapi import APIRouter, Depends
 from sse_starlette.sse import EventSourceResponse
 
 from app.db.streaming_helpers import get_session_factory
@@ -66,9 +66,7 @@ async def stream_oracle_orders_changes(
     Returns:
         EventSourceResponse with order change events
     """
-    logger.info(
-        f"Starting Oracle orders stream (limit={request.limit}, interval={request.poll_interval})"
-    )
+    logger.info(f"Starting Oracle orders stream (limit={request.limit}, interval={request.poll_interval})")
     return EventSourceResponse(
         stream_oracle_orders_changes_data(
             session_factory=session_factory,

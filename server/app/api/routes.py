@@ -1,6 +1,6 @@
 from fastapi import FastAPI
-# Force reload
 
+# Force reload
 from app.api.routers import (
     chat_router,
     health_router,

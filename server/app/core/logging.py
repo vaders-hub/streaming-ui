@@ -1,5 +1,6 @@
 import logging
 
+
 def setup_logging(level: int = logging.INFO):
     """Configure basic logging for the application"""
     logging.basicConfig(

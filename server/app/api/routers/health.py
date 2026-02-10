@@ -46,9 +46,7 @@ async def health() -> HealthResponse:
 
     overall_status = "healthy" if (oracle_healthy or redis_healthy) else "degraded"
 
-    logger.info(
-        f"Health check: {overall_status} (Oracle: {oracle_healthy}, Redis: {redis_healthy})"
-    )
+    logger.info(f"Health check: {overall_status} (Oracle: {oracle_healthy}, Redis: {redis_healthy})")
 
     return HealthResponse(
         status=overall_status,

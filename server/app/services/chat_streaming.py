@@ -2,8 +2,8 @@ import asyncio
 import json
 import logging
 import time
-from datetime import datetime
 from collections.abc import AsyncGenerator, AsyncIterator
+from datetime import datetime
 
 from openai.types.chat import ChatCompletionChunk
 
@@ -16,9 +16,7 @@ logger = logging.getLogger(__name__)
 class ChatStreamLogger:
     """Context manager for chat stream logging and metrics."""
 
-    def __init__(
-        self, req_id: str, client_ip: str | None, mode: str, chunk_size: int, prompt_preview: str
-    ):
+    def __init__(self, req_id: str, client_ip: str | None, mode: str, chunk_size: int, prompt_preview: str):
         self.req_id = req_id
         self.client_ip = client_ip
         self.mode = mode
@@ -109,7 +107,7 @@ async def _generate_chunks(
 
     async for chunk in stream:
         monitor.log_first_token()
-        
+
         delta = chunk.choices[0].delta.content if chunk.choices else None
         if not delta:
             continue
@@ -119,17 +117,17 @@ async def _generate_chunks(
         else:
             buffer += delta
             should_flush = False
-            
+
             if mode == "chars" and len(buffer) >= chunk_size:
                 should_flush = True
             elif mode == "paragraph":
                 if _is_paragraph_boundary(buffer) or len(buffer) >= flush_threshold:
                     should_flush = True
-            
+
             if should_flush:
                 yield buffer
                 buffer = ""
-        
+
         # Keep loop cooperative
         await asyncio.sleep(0)
 
@@ -159,9 +157,7 @@ async def stream_openai_chat(
 
     # Prepare prompt preview
     preview_len = settings.chat_prompt_preview_length
-    prompt_preview = (
-        (prompt[:preview_len] + "...") if len(prompt) > preview_len else prompt
-    ).replace("\n", " ")
+    prompt_preview = ((prompt[:preview_len] + "...") if len(prompt) > preview_len else prompt).replace("\n", " ")
 
     monitor = ChatStreamLogger(req_id, client_ip, mode, chunk_size, prompt_preview)
 

@@ -5,7 +5,6 @@ from sqlalchemy import create_engine, event
 from sqlalchemy.orm import Session, sessionmaker
 
 from app.core.config import settings
-from app.db.models import Base  # Import Base for metadata
 
 
 class DatabaseManager:

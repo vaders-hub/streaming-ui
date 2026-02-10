@@ -33,11 +33,7 @@ class Order(Base):
     order_date: Mapped[datetime] = mapped_column(nullable=False)
 
     def __repr__(self) -> str:
-        return (
-            f"Order(order_id={self.order_id}, "
-            f"customer_id={self.customer_id}, "
-            f"status='{self.status}')"
-        )
+        return f"Order(order_id={self.order_id}, " f"customer_id={self.customer_id}, " f"status='{self.status}')"
 
     def to_dict(self) -> dict:
         """Convert model to dictionary."""

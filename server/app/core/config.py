@@ -38,12 +38,8 @@ class Settings(BaseSettings):
     openai_model: str = Field(default="gpt-4o-mini", alias="OPENAI_MODEL")
 
     # Chat streaming settings
-    chat_prompt_preview_length: int = Field(
-        default=50, description="Length of prompt preview in logs"
-    )
-    chat_paragraph_flush_threshold: int = Field(
-        default=200, description="Minimum buffer size for paragraph mode"
-    )
+    chat_prompt_preview_length: int = Field(default=50, description="Length of prompt preview in logs")
+    chat_paragraph_flush_threshold: int = Field(default=200, description="Minimum buffer size for paragraph mode")
 
     class Config:
         env_file = ".env"
