@@ -1,0 +1,24 @@
+services:
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    restart: always
+
+  oracle-free:
+    image: gvenzl/oracle-free:latest
+    ports:
+      - "1521:1521"
+    environment:
+      - ORACLE_PASSWORD=qkxm77
+      - APP_USER=ot
+      - APP_USER_PASSWORD=qkxm77
+    volumes:
+      - oracle_data:/opt/oracle/oradata
+    restart: always
+
+volumes:
+  redis_data:
+  oracle_data:
